@@ -1,0 +1,17 @@
+print("Name:V.Gagan ")
+print("Reg no:192472263")
+
+from nltk.stem import PorterStemmer
+
+stemmer = PorterStemmer()
+
+words = ["running", "runs", "easily", "studies", "studying",
+         "connection", "connected", "connecting", "happiness", "caresses",
+         "ponies", "agreed", "plastered", "generalization"]
+
+print(f"{'Word':18}{'Stem'}")
+print("-" * 30)
+for w in words:
+    print(f"{w:18}{stemmer.stem(w)}")
+
+input("Press Enter to exit")
