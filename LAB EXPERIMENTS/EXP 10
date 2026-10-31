@@ -1,0 +1,29 @@
+print("Name:V.Gagan")
+print("Reg no:192472263")
+lexicon = {
+    "the": "DT", "a": "DT",
+    "dog": "NN", "cat": "NN", "race": "NN",
+    "can": "MD", "will": "MD",
+    "run": "VB", "to": "TO",
+}
+
+rules = [
+    ("NN", "VB", "TO"),
+    ("NN", "VB", "MD"),
+    ("VB", "NN", "DT"),
+]
+
+def tag(words):
+    tags = [lexicon.get(w, "NN") for w in words]
+    print("Initial :", list(zip(words, tags)))
+    for old, new, prev in rules:
+        for i in range(1, len(words)):
+            if tags[i] == old and tags[i - 1] == prev:
+                tags[i] = new
+    return list(zip(words, tags))
+
+for sentence in ["i want to race", "the dog will race", "the race"]:
+    print("Final   :", tag(sentence.split()))
+    print()
+
+input("Press Enter to exit")
