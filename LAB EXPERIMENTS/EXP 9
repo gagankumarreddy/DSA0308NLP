@@ -1,0 +1,29 @@
+print("Name:V.Gagan")
+print("Reg no:192472263")
+import re
+
+rules = [
+    (r"^(the|a|an)$", "DT"),
+    (r"^(in|on|over|under|at|with|by)$", "IN"),
+    (r"^(and|or|but)$", "CC"),
+    (r"^(i|you|he|she|it|we|they)$", "PRP"),
+    (r"^(is|am|are|was|were)$", "VB"),
+    (r"^\d+$", "CD"),
+    (r".*ing$", "VBG"),
+    (r".*ed$", "VBD"),
+    (r".*ly$", "RB"),
+    (r".*(ous|ful|ive|able|al)$", "JJ"),
+    (r".*s$", "NNS"),
+    (r".*", "NN"),
+]
+
+def tag(word):
+    for pattern, t in rules:
+        if re.match(pattern, word.lower()):
+            return t
+
+text = "The quick dog was running quickly over 3 wonderful bridges and jumped"
+for w in text.split():
+    print(f"{w:12}{tag(w)}")
+
+input("Press Enter to exit")
