@@ -1,0 +1,29 @@
+print("Name:V.Gagan")
+print("Reg no:192472263")
+import random
+from collections import defaultdict
+
+text = """the cat sat on the mat the dog sat on the rug
+the cat saw the dog and the dog saw the cat
+the dog chased the cat around the mat"""
+
+words = text.split()
+
+bigrams = defaultdict(list)
+for i in range(len(words) - 1):
+    bigrams[words[i]].append(words[i + 1])
+
+def generate(start, length=10):
+    word = start
+    result = [word]
+    for _ in range(length - 1):
+        if word not in bigrams:
+            break
+        word = random.choice(bigrams[word])
+        result.append(word)
+    return " ".join(result)
+
+for _ in range(3):
+    print(generate("the"))
+
+input("Press Enter to exit")
