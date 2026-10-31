@@ -1,0 +1,39 @@
+print("Name:V.Gagan")
+print("Reg no:192472263")
+from collections import defaultdict, Counter
+
+train = [
+    [("the", "DT"), ("dog", "NN"), ("runs", "VB")],
+    [("a", "DT"), ("cat", "NN"), ("sleeps", "VB")],
+    [("the", "DT"), ("big", "JJ"), ("cat", "NN"), ("sees", "VB"), ("a", "DT"), ("dog", "NN")],
+]
+
+emit = defaultdict(Counter)
+trans = defaultdict(Counter)
+count = Counter()
+
+for sent in train:
+    prev = "<S>"
+    for w, t in sent:
+        emit[t][w] += 1
+        trans[prev][t] += 1
+        count[t] += 1
+        prev = t
+
+tags = list(count)
+
+def tag_sentence(words):
+    result = []
+    prev = "<S>"
+    for w in words:
+        best = max(tags, key=lambda t:
+                   (trans[prev][t] + 1) / (sum(trans[prev].values()) + len(tags))
+                   * (emit[t][w] + 0.01) / (count[t] + 1))
+        result.append((w, best))
+        prev = best
+    return result
+
+for w, t in tag_sentence("the big dog sleeps".split()):
+    print(w, t)
+
+input("Press Enter to exit")
