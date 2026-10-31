@@ -1,0 +1,37 @@
+print("Name:V.Gagan")
+print("Reg no: 192472263")
+VOWELS = "aeiou"
+
+def pluralize(word):
+    word = word.lower().strip()
+    state = "START"
+    for ch in reversed(word):
+        if state == "START":
+            if ch in "sxz":
+                state = "ES"
+            elif ch == "h":
+                state = "H"
+            elif ch == "y":
+                state = "Y"
+            else:
+                state = "S"
+        elif state == "H":
+            state = "ES" if ch in "cs" else "S"
+        elif state == "Y":
+            state = "S" if ch in VOWELS else "IES"
+        if state in ("S", "ES", "IES"):
+            break
+
+    if state == "H":
+        state = "S"
+    if state == "Y":
+        state = "IES"
+
+    return {"S": word + "s",
+            "ES": word + "es",
+            "IES": word[:-1] + "ies"}[state]
+
+for w in ["cat", "bus", "box", "buzz", "church", "dish", "boy", "city"]:
+    print(w, "->", pluralize(w))
+
+input("Press Enter to exit")
