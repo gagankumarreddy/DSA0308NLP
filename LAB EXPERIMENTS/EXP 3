@@ -1,1 +1,15 @@
+print("Name: Gagan ")
+print("eg no: 192472263")
+from nltk.stem import PorterStemmer
 
+stemmer = PorterStemmer()
+
+text = "The children were running and studying better methods"
+words = text.split()
+
+print("Word        Stem")
+print("-" * 20)
+for w in words:
+    print(f"{w:12}{stemmer.stem(w)}")
+
+input("Press Enter to exit")
