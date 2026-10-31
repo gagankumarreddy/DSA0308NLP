@@ -1,0 +1,36 @@
+print("Name:V.Gagan")
+print("Reg no:192472263")
+import re
+
+lexicon = {
+    "the": "DT", "a": "DT", "an": "DT",
+    "over": "IN", "on": "IN", "in": "IN",
+    "quick": "JJ", "brown": "JJ", "lazy": "JJ",
+    "fox": "NN", "dog": "NN", "cat": "NN",
+    "jumps": "VBZ", "runs": "VBZ", "eats": "VBZ",
+}
+
+def tag(word):
+    w = word.lower()
+    if w in lexicon:
+        return lexicon[w]
+    if re.fullmatch(r"\d+", w):
+        return "CD"
+    if w.endswith("ing"):
+        return "VBG"
+    if w.endswith("ed"):
+        return "VBD"
+    if w.endswith("ly"):
+        return "RB"
+    if w.endswith("s"):
+        return "NNS"
+    return "NN"
+
+text = "The quick brown fox jumps over the lazy dog"
+
+print("Word        POS")
+print("-" * 20)
+for w in text.split():
+    print(f"{w:12}{tag(w)}")
+
+input("Press Enter to exit")
