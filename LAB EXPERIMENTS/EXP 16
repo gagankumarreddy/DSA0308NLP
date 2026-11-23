@@ -1,0 +1,28 @@
+
+text = "Gagan studies at SIMATS University in Chennai. He visited Delhi on 15 August 2025."
+
+names = ["Gagan"]
+organizations = ["SIMATS University"]
+locations = ["Chennai", "Delhi"]
+dates = ["15 August 2025"]
+
+print("Input Text:")
+print(text)
+
+print("\nNamed Entities:")
+
+for word in names:
+    if word in text:
+        print(word, "- PERSON")
+
+for word in organizations:
+    if word in text:
+        print(word, "- ORGANIZATION")
+
+for word in locations:
+    if word in text:
+        print(word, "- LOCATION")
+
+for word in dates:
+    if word in text:
+        print(word, "- DATE")
