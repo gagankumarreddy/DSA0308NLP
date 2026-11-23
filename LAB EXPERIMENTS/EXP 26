@@ -1,0 +1,19 @@
+
+dictionary = {
+    "hello": "bonjour",
+    "good morning": "bonjour",
+    "good night": "bonne nuit",
+    "how are you": "comment allez-vous",
+    "thank you": "merci",
+    "goodbye": "au revoir",
+    "i love you": "je t'aime",
+    "welcome": "bienvenue"
+}
+
+text = input("Enter English text: ").lower()
+
+if text in dictionary:
+    print("\nFrench Translation:")
+    print(dictionary[text])
+else:
+    print("\nTranslation not available")
