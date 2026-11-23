@@ -1,0 +1,19 @@
+
+import re
+
+expression = input("Enter a logical expression: ")
+
+tokens = re.findall(r'[A-Za-z]+|\(|\)|,|&|\||~|->', expression)
+
+print("\nTokens:")
+print(tokens)
+
+print("\nParsed Expression:")
+
+for token in tokens:
+    if token in ["&", "|", "~", "->"]:
+        print(token, "- Logical Operator")
+    elif token in ["(", ")", ","]:
+        print(token, "- Symbol")
+    else:
+        print(token, "- Predicate or Variable")
