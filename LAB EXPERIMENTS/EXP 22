@@ -1,0 +1,21 @@
+
+text = input("Enter a text: ")
+
+words = text.split()
+
+nouns = []
+pronouns = ["he", "she", "it", "they", "him", "her"]
+
+print("\nReference Resolution:")
+
+for i, word in enumerate(words):
+    clean = word.lower().strip(".,!?")
+
+    if clean in pronouns:
+        if nouns:
+            print(clean, "refers to", nouns[-1])
+        else:
+            print(clean, "- Reference not found")
+
+    elif clean not in ["is", "was", "are", "and", "the", "a", "an", "went", "has", "likes"]:
+        nouns.append(word.strip(".,!?"))
