@@ -1,0 +1,34 @@
+
+sentence = input("Enter a sentence: ").lower()
+word = input("Enter the ambiguous word: ").lower().strip()
+
+meanings = {
+    "bank": {
+        "Financial Institution": ["money", "deposit", "loan", "account"],
+        "River Side": ["river", "water", "shore", "fishing"]
+    },
+    "bat": {
+        "Animal": ["cave", "fly", "animal", "wings"],
+        "Sports Equipment": ["cricket", "ball", "hit", "game"]
+    }
+}
+
+if word in meanings:
+    context = sentence.split()
+    best_meaning = ""
+    max_score = 0
+
+    for meaning, keywords in meanings[word].items():
+        score = sum(1 for w in context if w in keywords)
+
+        if score > max_score:
+            max_score = score
+            best_meaning = meaning
+
+    if best_meaning:
+        print("Word:", word)
+        print("Correct Meaning:", best_meaning)
+    else:
+        print("Meaning could not be identified.")
+else:
+    print("Word not available in dictionary.")
