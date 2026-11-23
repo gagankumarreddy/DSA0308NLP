@@ -1,0 +1,22 @@
+
+print("Text Generation Program")
+
+prompt = input("Enter your prompt: ").lower()
+
+if "artificial intelligence" in prompt:
+    result = "Artificial Intelligence enables machines to perform tasks that require human intelligence."
+
+elif "python" in prompt:
+    result = "Python is a simple and powerful programming language used in many applications."
+
+elif "education" in prompt:
+    result = "Education helps people gain knowledge, skills and improve their future."
+
+elif "technology" in prompt:
+    result = "Technology makes human life easier through modern tools and innovations."
+
+else:
+    result = "This is a generated response based on your prompt."
+
+print("\nGenerated Text:")
+print(result)
