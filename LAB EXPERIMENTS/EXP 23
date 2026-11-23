@@ -1,0 +1,34 @@
+
+text = input("Enter a text: ")
+
+sentences = text.split(".")
+
+print("\nCoherence Analysis:")
+
+total = 0
+count = 0
+
+for i in range(len(sentences) - 1):
+    s1 = set(sentences[i].lower().split())
+    s2 = set(sentences[i + 1].lower().split())
+
+    if s1 and s2:
+        common = s1.intersection(s2)
+        score = len(common) / len(s1.union(s2)) * 100
+
+        print("Sentence", i + 1, "and", i + 2)
+        print("Coherence Score:", round(score, 2), "%")
+
+        total += score
+        count += 1
+
+if count > 0:
+    average = total / count
+    print("\nOverall Coherence:", round(average, 2), "%")
+
+    if average >= 30:
+        print("Text is Coherent")
+    else:
+        print("Text has Low Coherence")
+else:
+    print("Enter at least two sentences.")
