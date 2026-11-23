@@ -1,0 +1,33 @@
+
+import math
+
+documents = [
+    "Python is a programming language",
+    "Java is used for software development",
+    "Python is used for machine learning"
+]
+
+query = input("Enter search query: ").lower().split()
+
+words = set(" ".join(documents).lower().split())
+
+scores = {}
+
+for i, doc in enumerate(documents):
+    terms = doc.lower().split()
+    score = 0
+
+    for word in query:
+        tf = terms.count(word) / len(terms)
+        df = sum(1 for d in documents if word in d.lower().split())
+        idf = math.log((len(documents) + 1) / (df + 1)) + 1
+        score += tf * idf
+
+    scores[i] = score
+
+print("\nDocument Ranking:")
+
+for i, score in sorted(scores.items(),
+                       key=lambda x: x[1], reverse=True):
+    print("Document:", documents[i])
+    print("TF-IDF Score:", round(score, 4))
