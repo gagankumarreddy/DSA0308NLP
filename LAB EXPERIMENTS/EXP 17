@@ -1,0 +1,13 @@
+
+from nltk.corpus import wordnet
+
+word = input("Enter a word: ")
+
+synsets = wordnet.synsets(word)
+
+print("\nSynsets of", word, ":")
+
+for syn in synsets:
+    print("\nSynset:", syn.name())
+    print("Meaning:", syn.definition())
+    print("Examples:", syn.examples())
