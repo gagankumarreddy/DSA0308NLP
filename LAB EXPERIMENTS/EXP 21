@@ -1,0 +1,24 @@
+
+import re
+
+sentence = input("Enter a sentence: ")
+
+patterns = re.findall(
+    r'\b(the|a|an)\s+(\w+)\b',
+    sentence.lower()
+)
+
+meanings = {
+    "dog": "A domestic animal",
+    "cat": "A small domestic animal",
+    "book": "A collection of written pages",
+    "student": "A person who studies",
+    "teacher": "A person who teaches",
+    "car": "A road vehicle"
+}
+
+print("\nNoun Phrases and Their Meanings:")
+
+for det, noun in patterns:
+    print("Noun Phrase:", det, noun)
+    print("Meaning:", meanings.get(noun, "Meaning not available"))
