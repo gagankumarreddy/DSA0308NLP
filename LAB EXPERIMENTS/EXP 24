@@ -1,0 +1,33 @@
+
+dialog = input("Enter a conversation: ")
+
+sentences = dialog.split(".")
+
+print("\nDialog Act Recognition:")
+
+for sentence in sentences:
+    sentence = sentence.strip()
+    text = sentence.lower()
+
+    if not sentence:
+        continue
+
+    if any(word in text.split() for word in ["hello", "hi", "hey"]):
+        act = "Greeting"
+
+    elif sentence.endswith("?"):
+        act = "Question"
+
+    elif any(word in text.split() for word in ["please", "kindly"]):
+        act = "Request"
+
+    elif any(word in text.split() for word in ["thanks", "thank"]):
+        act = "Thanking"
+
+    elif any(word in text.split() for word in ["bye", "goodbye"]):
+        act = "Goodbye"
+
+    else:
+        act = "Statement"
+
+    print(sentence, "->", act)
