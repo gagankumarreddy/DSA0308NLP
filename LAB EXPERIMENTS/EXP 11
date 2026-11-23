@@ -1,0 +1,29 @@
+
+grammar = {
+    'S': [['a', 'S', 'b'], ['a', 'b']]
+}
+
+def parse(symbols, string):
+    if not symbols:
+        return string == ""
+
+    first = symbols[0]
+    remaining = symbols[1:]
+
+    if first not in grammar:
+        if string.startswith(first):
+            return parse(remaining, string[len(first):])
+        return False
+
+    for production in grammar[first]:
+        if parse(production + remaining, string):
+            return True
+
+    return False
+
+input_string = input("Enter a string: ")
+
+if parse(['S'], input_string):
+    print("String Accepted")
+else:
+    print("String Rejected")
