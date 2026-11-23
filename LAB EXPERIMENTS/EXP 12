@@ -1,0 +1,62 @@
+print("Name: Gagan")
+print("Reg No: 192472263")
+
+grammar = {
+    'S': [['a', 'S', 'b'], ['a', 'b']]
+}
+
+def earley_parser(text):
+    n = len(text)
+    chart = [set() for _ in range(n + 1)]
+
+    chart[0].add(('S0', ('S',), 0, 0))
+
+    for i in range(n + 1):
+        agenda = list(chart[i])
+        processed = set()
+
+        while agenda:
+            rule = agenda.pop()
+
+            if rule in processed:
+                continue
+            processed.add(rule)
+
+            lhs, rhs, dot, start = rule
+
+            if dot < len(rhs):
+                symbol = rhs[dot]
+
+                if symbol in grammar:
+                    for prod in grammar[symbol]:
+                        item = (symbol, tuple(prod), 0, i)
+                        if item not in chart[i]:
+                            chart[i].add(item)
+                            agenda.append(item)
+
+                elif i < n and text[i] == symbol:
+                    chart[i + 1].add(
+                        (lhs, rhs, dot + 1, start)
+                    )
+
+            else:
+                for prev in list(chart[start]):
+                    if prev[2] < len(prev[1]):
+                        if prev[1][prev[2]] == lhs:
+                            item = (
+                                prev[0], prev[1],
+                                prev[2] + 1, prev[3]
+                            )
+                            if item not in chart[i]:
+                                chart[i].add(item)
+                                agenda.append(item)
+
+    return ('S0', ('S',), 1, 0) in chart[n]
+
+
+input_string = input("Enter a string: ")
+
+if earley_parser(input_string):
+    print("String Accepted")
+else:
+    print("String Rejected")
